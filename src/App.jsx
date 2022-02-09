@@ -9,9 +9,11 @@ const App = () => {
 };
 
 const Wrapped = () => {
-  <AppWrapper>
-    <App />
-  </AppWrapper>;
+  return (
+    <AppWrapper>
+      <App />
+    </AppWrapper>
+  );
 };
 
 export default Wrapped;
