@@ -8,14 +8,14 @@ const NavBar = () => {
   return (
     <AppBar>
       <Toolbar sx={{ display: "flex", justifyContent: "right" }}>
-        <IconButton>
-          <Brightness4Icon
-            onClick={() =>
-              theme === themeTypes.dark
-                ? setTheme(themeTypes.light)
-                : setTheme(themeTypes.dark)
-            }
-          />
+        <IconButton
+          onClick={() =>
+            theme === themeTypes.dark
+              ? setTheme(themeTypes.light)
+              : setTheme(themeTypes.dark)
+          }
+        >
+          <Brightness4Icon />
         </IconButton>
       </Toolbar>
     </AppBar>
