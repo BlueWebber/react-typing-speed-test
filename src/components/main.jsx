@@ -20,7 +20,7 @@ const Main = () => {
     accuracy: 0,
   });
 
-  const getElapsedTime = React.useCallback(() => 20, []);
+  const duration = 60;
 
   return (
     <Container
@@ -60,7 +60,7 @@ const Main = () => {
             alignItems: "center",
           }}
         >
-          <CircleTimer duration={40} isPlaying={isPlaying} />
+          <CircleTimer duration={duration} isPlaying={isPlaying} />
           <SpeedData title="words/min">{statistics.wpm}</SpeedData>
           <SpeedData title="chars/min">{statistics.cpm}</SpeedData>
           <SpeedData title="accuracy %">{statistics.accuracy}</SpeedData>
@@ -70,7 +70,7 @@ const Main = () => {
           setIsPlaying={setIsPlaying}
           setStatistics={setStatistics}
           numberOfWords={500}
-          getElapsedTime={getElapsedTime}
+          duration={duration}
         />
       </Paper>
     </Container>

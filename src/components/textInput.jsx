@@ -55,7 +55,8 @@ const reducer = (state, action) => {
         ],
 
         ...(isCorrect && {
-          numberOfCorrectCharacters: state.numberOfCorrectCharacters + 1,
+          numberOfCorrectCharacters:
+            state.numberOfCorrectCharacters + stateCurrentWord.length,
           numberOfCorrectWords: state.numberOfCorrectWords + 1,
           numberOfTypedWords: state.numberOfTypedWords + 1,
         }),
@@ -79,7 +80,6 @@ const reducer = (state, action) => {
 
         ...(stateCurrentWord.startsWith(stateLastInput.word) && {
           joinedWords: stateLastInput.word.at(-1) + state.joinedWords,
-          numberOfCorrectCharacters: state.numberOfCorrectCharacters - 1,
         }),
       };
     }
@@ -104,7 +104,6 @@ const reducer = (state, action) => {
 
         ...(isNewCorrect && {
           joinedWords: state.joinedWords.slice(1),
-          numberOfCorrectCharacters: state.numberOfCorrectCharacters + 1,
         }),
       };
     }
@@ -118,9 +117,9 @@ const reducer = (state, action) => {
 const TextInput = ({
   isPlaying,
   setIsPlaying,
-  getElapsedTime,
   setStatistics,
   numberOfWords,
+  duration,
 }) => {
   const shuffledWords = React.useMemo(
     () => shuffle(words.slice(0, numberOfWords)),
@@ -138,21 +137,33 @@ const TextInput = ({
     typingIndex: 0,
   }));
 
+  React.useEffect(() => {
+    setStatistics({
+      cpm: Math.round(state.numberOfCorrectCharacters / (duration / 60)),
+      accuracy: Math.round(
+        (state.numberOfCorrectWords / state.numberOfTypedWords) * 100 || 0
+      ),
+      wpm: Math.round(state.numberOfCorrectCharacters / 5 / (duration / 60)),
+    });
+  }, [
+    duration,
+    setStatistics,
+    state.numberOfCorrectCharacters,
+    state.numberOfCorrectWords,
+    state.numberOfTypedWords,
+  ]);
+
+  const [testOver, setTestOver] = React.useState(false);
+
+  React.useEffect(() => {
+    setTimeout(() => setTestOver(true), (duration + 1) * 1000);
+  }, [isPlaying, duration]);
+
   const handleInputChange = (e) => {
     const key = e.key.toLowerCase();
 
     if (key === " ") {
       dispatch({ type: actionTypes.endWord });
-      const elapsedTime = getElapsedTime();
-      setStatistics({
-        cpm: Math.round(state.numberOfCorrectCharacters / (elapsedTime / 60)),
-        accuracy: Math.round(
-          (state.numberOfCorrectWords / state.numberOfTypedWords) * 100 || 0
-        ),
-        wpm: Math.round(
-          state.numberOfCorrectCharacters / 5 / (elapsedTime / 60)
-        ),
-      });
     } else if (key.length !== 1) {
       if (key === "backspace" && state.inputs[state.typingIndex].word) {
         dispatch({ type: actionTypes.removeChar });
@@ -186,6 +197,7 @@ const TextInput = ({
         value=""
         onKeyDown={handleInputChange}
         onChange={() => {}}
+        disabled={testOver}
       />
       <Grid container>
         <Grid
