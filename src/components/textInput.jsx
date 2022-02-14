@@ -182,6 +182,7 @@ const TextInput = ({
         mr: 5,
         ml: 5,
         mt: 5,
+        mb: 5,
         display: "flex",
         justifyContent: "stretch",
         fontFamily: '"Kalam", cursive',
