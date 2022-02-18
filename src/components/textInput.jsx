@@ -1,9 +1,9 @@
 import React from "react";
 import { Paper, Typography, Grid } from "@mui/material";
 import styled from "@emotion/styled";
-import words from "../assets/words.json";
 import shuffle from "../utils/shuffle";
 import generateGuid from "../utils/guid";
+import { getWords } from "../helpers";
 
 const StyledTextInput = styled.input`
   width: 5px;
@@ -114,16 +114,10 @@ const reducer = (state, action) => {
   }
 };
 
-const TextInput = ({
-  isPlaying,
-  setIsPlaying,
-  setStatistics,
-  numberOfWords,
-  duration,
-}) => {
+const TextInput = ({ isPlaying, setIsPlaying, setStatistics, duration }) => {
   const shuffledWords = React.useMemo(
-    () => shuffle(words.slice(0, numberOfWords)),
-    [numberOfWords]
+    () => shuffle(getWords()).slice(0, 500),
+    []
   );
 
   const [state, dispatch] = React.useReducer(reducer, {}, () => ({
@@ -156,7 +150,7 @@ const TextInput = ({
   const [testOver, setTestOver] = React.useState(false);
 
   React.useEffect(() => {
-    setTimeout(() => setTestOver(true), (duration + 1) * 1000);
+    isPlaying && setTimeout(() => setTestOver(true), duration * 1000);
   }, [isPlaying, duration]);
 
   const handleInputChange = (e) => {

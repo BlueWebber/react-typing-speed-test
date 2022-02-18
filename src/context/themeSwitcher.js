@@ -10,8 +10,16 @@ const themeTypes = {
   light: "light",
 };
 
-const lightTheme = createTheme({ palette: { mode: "light" } });
-const darkTheme = createTheme({ palette: { mode: "dark" } });
+const config = {
+  typography: {
+    button: {
+      textTransform: "none",
+    },
+  },
+};
+
+const lightTheme = createTheme({ palette: { mode: "light" }, ...config });
+const darkTheme = createTheme({ palette: { mode: "dark" }, ...config });
 
 const ThemeSwitcherProvider = ({ children }) => {
   const [theme, setTheme] = React.useState(themeTypes.dark);
@@ -19,7 +27,7 @@ const ThemeSwitcherProvider = ({ children }) => {
   return (
     <ThemeSwitcherContext.Provider value={[theme, setTheme]}>
       <ThemeProvider theme={theme === themeTypes.dark ? darkTheme : lightTheme}>
-        <CssBaseline />
+        <CssBaseline enableColorScheme />
         {children}
       </ThemeProvider>
     </ThemeSwitcherContext.Provider>
