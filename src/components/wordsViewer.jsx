@@ -28,9 +28,11 @@ let Word = ({
   const isEditing = editingWord?.index === index;
 
   const deleteWord = () => {
-    const wordsClone = [...words];
-    wordsClone.splice(index, 1);
-    setWords(wordsClone);
+    setWords((words) => {
+      const wordsClone = [...words];
+      wordsClone.splice(index, 1);
+      return wordsClone;
+    });
   };
 
   const startEdit = () => {
