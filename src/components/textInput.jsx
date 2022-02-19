@@ -114,7 +114,14 @@ const reducer = (state, action) => {
   }
 };
 
-const TextInput = ({ isPlaying, setIsPlaying, setStatistics, duration }) => {
+const TextInput = ({
+  isPlaying,
+  setIsPlaying,
+  setStatistics,
+  duration,
+  isFinished,
+  setIsFinished,
+}) => {
   const shuffledWords = React.useMemo(
     () => shuffle([...getWords()]).slice(0, 500),
     []
@@ -147,11 +154,12 @@ const TextInput = ({ isPlaying, setIsPlaying, setStatistics, duration }) => {
     state.numberOfTypedWords,
   ]);
 
-  const [testOver, setTestOver] = React.useState(false);
-
   React.useEffect(() => {
-    isPlaying && setTimeout(() => setTestOver(true), duration * 1000);
-  }, [isPlaying, duration]);
+    isPlaying &&
+      setTimeout(() => {
+        setIsFinished(true);
+      }, duration * 1000);
+  }, [isPlaying, duration, setIsFinished]);
 
   const handleInputChange = (e) => {
     const key = e.key.toLowerCase();
@@ -192,7 +200,7 @@ const TextInput = ({ isPlaying, setIsPlaying, setStatistics, duration }) => {
         value=""
         onKeyDown={handleInputChange}
         onChange={() => {}}
-        disabled={testOver}
+        disabled={isFinished}
       />
       <Grid container>
         <Grid

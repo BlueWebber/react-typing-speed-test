@@ -5,6 +5,7 @@ import TypingTest from "./typingTest";
 
 const Main = () => {
   const [settingsOpen, setSettingsOpen] = React.useState(false);
+  const [testKey, setTestKey] = React.useState(1);
 
   return (
     <Container
@@ -14,7 +15,11 @@ const Main = () => {
     >
       <Paper sx={{ display: "flex", flexDirection: "column", borderRadius: 2 }}>
         {!settingsOpen ? (
-          <TypingTest setSettingsOpen={setSettingsOpen} />
+          <TypingTest
+            setSettingsOpen={setSettingsOpen}
+            handleRestart={() => setTestKey(testKey + 1)}
+            key={testKey}
+          />
         ) : (
           <Settings setSettingsOpen={setSettingsOpen} />
         )}

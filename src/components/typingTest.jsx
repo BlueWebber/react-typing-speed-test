@@ -5,14 +5,16 @@ import SpeedData from "./speedData";
 import CircleTimer from "./circleTimer";
 import TextInput from "./textInput";
 import { getTime } from "../helpers";
+import ResultDialog from "./resultDialog";
 
-const TypingTest = ({ setSettingsOpen }) => {
+const TypingTest = ({ setSettingsOpen, handleRestart }) => {
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [statistics, setStatistics] = React.useState({
     wpm: 0,
     cpm: 0,
     accuracy: 0,
   });
+  const [isFinished, setIsFinished] = React.useState(false);
 
   const duration = React.useMemo(getTime, []);
 
@@ -65,8 +67,17 @@ const TypingTest = ({ setSettingsOpen }) => {
         isPlaying={isPlaying}
         setIsPlaying={setIsPlaying}
         setStatistics={setStatistics}
+        isFinished={isFinished}
+        setIsFinished={setIsFinished}
         duration={duration}
       />
+      {isFinished && (
+        <ResultDialog
+          statistics={statistics}
+          handleRestart={handleRestart}
+          handleSettings={() => setSettingsOpen(true)}
+        />
+      )}
     </>
   );
 };
