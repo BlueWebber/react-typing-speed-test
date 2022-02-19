@@ -116,7 +116,7 @@ const reducer = (state, action) => {
 
 const TextInput = ({ isPlaying, setIsPlaying, setStatistics, duration }) => {
   const shuffledWords = React.useMemo(
-    () => shuffle(getWords()).slice(0, 500),
+    () => shuffle([...getWords()]).slice(0, 500),
     []
   );
 

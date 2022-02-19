@@ -1,6 +1,8 @@
 import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { CssBaseline } from "@mui/material";
+import { CssBaseline, GlobalStyles } from "@mui/material";
+import DarkBg from "../assets/backgrounds/dark.png";
+import LightBg from "../assets/backgrounds/light.png";
 
 const ThemeSwitcherContext = React.createContext();
 ThemeSwitcherContext.displayName = "ThemeContext";
@@ -28,6 +30,15 @@ const ThemeSwitcherProvider = ({ children }) => {
     <ThemeSwitcherContext.Provider value={[theme, setTheme]}>
       <ThemeProvider theme={theme === themeTypes.dark ? darkTheme : lightTheme}>
         <CssBaseline enableColorScheme />
+        <GlobalStyles
+          styles={{
+            body: {
+              backgroundImage: `url(${
+                theme === themeTypes.dark ? DarkBg : LightBg
+              })`,
+            },
+          }}
+        />
         {children}
       </ThemeProvider>
     </ThemeSwitcherContext.Provider>

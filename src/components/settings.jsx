@@ -33,6 +33,13 @@ const Settings = ({ setSettingsOpen }) => {
     cancel();
   };
 
+  const resetToDefault = () => {
+    localStorage.removeItem(storageVars.words);
+    localStorage.removeItem(storageVars.time);
+    setWords(getWords().map((word) => [word, generateGuid()]));
+    setTime(getTime());
+  };
+
   return (
     <Container>
       <Box sx={{ ...center, mt: 1, mb: 2 }}>
@@ -68,25 +75,27 @@ const Settings = ({ setSettingsOpen }) => {
       <WordsViewer words={words} setWords={setWords} />
       <Divider />
       <Box
-        sx={{
-          display: "flex",
-          flexGrow: 1,
-          mt: 1,
-          mb: 1,
-          flexDirection: "row-reverse",
-        }}
+        sx={{ display: "flex", justifyContent: "space-between", mt: 1, mb: 1 }}
       >
-        <Button color="success" variant="contained" onClick={save}>
-          Save
-        </Button>
-        <Button
-          color="error"
-          variant="contained"
-          sx={{ mr: 1 }}
-          onClick={cancel}
+        <Button onClick={resetToDefault}>Reset to default</Button>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row-reverse",
+          }}
         >
-          Discard
-        </Button>
+          <Button color="success" variant="contained" onClick={save}>
+            Save
+          </Button>
+          <Button
+            color="error"
+            variant="contained"
+            sx={{ mr: 1 }}
+            onClick={cancel}
+          >
+            Discard
+          </Button>
+        </Box>
       </Box>
     </Container>
   );
