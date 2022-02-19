@@ -1,5 +1,6 @@
 import AppWrapper from "./components/appWrapper";
 import NavBar from "./components/navBar";
+import Footer from "./components/footer";
 import Main from "./components/main";
 
 const App = () => {
@@ -9,6 +10,7 @@ const App = () => {
       <main>
         <Main />
       </main>
+      <Footer />
     </>
   );
 };
