@@ -47,6 +47,7 @@ const reducer = (state, action) => {
         joinedWords: isCorrect
           ? state.joinedWords.slice(1)
           : state.joinedWords.substr(state.joinedWords.indexOf("\u00A0") + 1),
+        numberOfTypedWords: state.numberOfTypedWords + 1,
 
         inputs: [
           ...state.inputs.slice(0, -1),
@@ -58,7 +59,6 @@ const reducer = (state, action) => {
           numberOfCorrectCharacters:
             state.numberOfCorrectCharacters + stateCurrentWord.length,
           numberOfCorrectWords: state.numberOfCorrectWords + 1,
-          numberOfTypedWords: state.numberOfTypedWords + 1,
         }),
       };
     }
