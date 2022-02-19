@@ -123,7 +123,7 @@ const TextInput = ({
   setIsFinished,
 }) => {
   const shuffledWords = React.useMemo(
-    () => shuffle([...getWords()]).slice(0, 500),
+    () => shuffle([...getWords()]).slice(0, duration < 250 ? 500 : 5000),
     []
   );
 
