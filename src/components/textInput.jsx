@@ -124,7 +124,7 @@ const TextInput = ({
 }) => {
   const shuffledWords = React.useMemo(
     () => shuffle([...getWords()]).slice(0, duration < 250 ? 500 : 5000),
-    []
+    [duration]
   );
 
   const [state, dispatch] = React.useReducer(reducer, {}, () => ({
