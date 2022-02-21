@@ -8,7 +8,7 @@ import {
   Divider,
   Button,
 } from "@mui/material";
-import WordsViewer from "./wordsViewer";
+import WordsViewer from "./wordsViewer/wordsViewer";
 import storageVars from "../localStorage";
 import generateGuid from "../utils/guid";
 import { getWords, getTime } from "../helpers";
