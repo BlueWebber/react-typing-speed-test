@@ -3,7 +3,7 @@ import { Box, Tooltip, Typography, IconButton } from "@mui/material";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import SpeedData from "./speedData";
 import CircleTimer from "./circleTimer";
-import TextInput from "./textInput";
+import TextInput from "./textInput/textInput";
 import { getTime } from "../helpers";
 import ResultDialog from "./resultDialog";
 
