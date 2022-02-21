@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/react-typing-speed-test/static/js/main.d786cb89.js",
+    "main.js": "/react-typing-speed-test/static/js/main.bd0f07a1.js",
     "static/media/light.png": "/react-typing-speed-test/static/media/light.f0fe21fae67d64a7a361.png",
     "static/media/dark.png": "/react-typing-speed-test/static/media/dark.f3b04e5bf6c1ab12007a.png",
     "index.html": "/react-typing-speed-test/index.html",
-    "main.d786cb89.js.map": "/react-typing-speed-test/static/js/main.d786cb89.js.map"
+    "main.bd0f07a1.js.map": "/react-typing-speed-test/static/js/main.bd0f07a1.js.map"
   },
   "entrypoints": [
-    "static/js/main.d786cb89.js"
+    "static/js/main.bd0f07a1.js"
   ]
 }
